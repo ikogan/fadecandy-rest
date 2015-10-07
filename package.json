@@ -1,0 +1,42 @@
+{
+  "name": "fadecandy-rest",
+  "version": "0.0.1",
+  "description": "REST API for FadeCandy Based LED Setups",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ikogan/fadecandy-rest.git"
+  },
+  "keywords": [
+    "FadeCandy",
+    "NeoPixels",
+    "LED",
+    "REST"
+  ],
+  "author": "Ilya Kogan <ikogan@flarecode.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ikogan/fadecandy-rest/issues"
+  },
+  "homepage": "https://github.com/ikogan/fadecandy-rest#readme",
+  "dependencies": {
+    "bluebird": "^2.10.2",
+    "config": "^1.16.0",
+    "debug": "^2.2.0",
+    "good": "^6.4.0",
+    "good-console": "^5.1.0",
+    "hapi": "~10.4.0",
+    "hapi-router": "^3.4.0",
+    "inert": "^3.1.0",
+    "joi": "^6.9.0",
+    "lodash": "^3.10.1",
+    "lout": "^7.2.0",
+    "vision": "^3.0.0",
+    "websocket": "^1.0.22",
+    "webworker-threads": "^0.6.2",
+    "yargs": "^3.26.0"
+  }
+}
