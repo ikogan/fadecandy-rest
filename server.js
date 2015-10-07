@@ -7,12 +7,13 @@ var fs = require('fs');
 var hapi = require('hapi');
 var config = require('config');
 var debug = require('debug')('fadecandy-rest:server');
-var opc = require('lib/opc.js')(config.get('opc.host'), config.get('opc.port'));
 
 if(!fs.existsSync('./node_modules/lib')) {
 	debug('Creating initial library link...');
 	fs.symlinkSync('../lib', './node_modules/lib');
 }
+
+var opc = require('lib/opc.js')(config.get('opc.host'), config.get('opc.port'));
 
 var appName = process.argv[0] === 'node' ? 'node ' + process.argv[1] : process.argv[0];
 var args = require('yargs')
