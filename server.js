@@ -17,11 +17,11 @@ var opc = require('lib/opc.js')(config.get('opc.host'), config.get('opc.port'));
 
 var appName = process.argv[0] === 'node' ? 'node ' + process.argv[1] : process.argv[0];
 var args = require('yargs')
-			.usage('Usage: ' + appName + "[options]")
+			.usage('Usage: ' + appName + " [options]")
 			.alias('c', 'config')
 			.nargs('c', 1)
-			.default('c', 'config/default.json')
-			.describe('c', 'Config file')
+			.default('c', './config')
+			.describe('c', 'Configuration directory.')
 			.help('help')
 			.argv;
 
