@@ -1,3 +1,8 @@
+/**
+ * Controller to manipulate defined patterns.
+ * 
+ * @author Ilya Kogan <ikogan@flarecode.com>
+ */
 var patterns = require('lib/patterns.js');
 var opc = require('lib/opc.js')();
 var _ = require('lodash');
@@ -15,16 +20,20 @@ module.exports = {
 				opc.startPattern(patterns[pattern]);
 				currentPattern = pattern;
 			} else {
-				return reply("Color " + color + " not found.").code(404);
+				return reply("Pattern " + pattern + " not found.").code(404);
 			}
 		} else {
-			return reply("Color " + color + " not found.").code(404);
+			return reply("Pattern " + pattern + " not found.").code(404);
 		}
 
 		return reply().code(204);
 	},
 
 	current: function(request, reply) {
-		return reply(pattern);
+		if(opc.currentPattern) {
+			return reply(currentPattern);
+		} else {
+			return reply("No current pattern running.").code(404);
+		}
 	}
 }
