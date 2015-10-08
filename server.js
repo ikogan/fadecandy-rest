@@ -52,6 +52,8 @@ opc.connect().then(function(opc) {
 		options: {
 			routes: 'controllers/**/routes.js'
 		}
+	}, {
+		register: require('lib/errorHandler.js')
 	}], function(error) {
 		if(error) {
 			console.error(error);
