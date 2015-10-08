@@ -35,8 +35,6 @@
     "lodash": "^3.10.1",
     "lout": "^7.2.0",
     "vision": "^3.0.0",
-    "websocket": "^1.0.22",
-    "webworker-threads": "^0.6.2",
     "yargs": "^3.26.0"
   }
 }
