@@ -4,7 +4,7 @@
   "description": "REST API for FadeCandy Based LED Setups",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,10 @@
     "url": "https://github.com/ikogan/fadecandy-rest/issues"
   },
   "homepage": "https://github.com/ikogan/fadecandy-rest#readme",
+  "devDependencies": {
+    "code": "^1.5.0",
+    "mocha-eslint": "^1.0.0"
+  },
   "dependencies": {
     "bluebird": "^2.10.2",
     "config": "^1.16.0",
