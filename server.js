@@ -5,6 +5,8 @@
  */
 var fs = require('fs');
 var hapi = require('hapi');
+var debug = require('debug')('fadecandy-rest:server');
+var pkgConfig = require('./package.json');
 
 // This may be a bit ugly but it helps deal with requiring small libraries
 // without having to maintain a symlink in the repo, actually committing
@@ -28,19 +30,18 @@ var args = require('yargs')
 			.argv;
 
 if(args.config) {
-	process.env['NODE_CONFIG_DIR'] = args.config;
+	process.env.NODE_CONFIG_DIR = args.config;
 }
 
 // Setup debugging, configuration, and the OPC client
-var debug = require('debug')('fadecandy-rest:server');
 var config = require('config');
 var opc = require('lib/opc.js')(config.get('opc.host'), config.get('opc.port'));
 
 // Create the hapi server
 var server = new hapi.Server();
 server.connection({
-	host: config.get('host'),
-	port: config.get('port')
+	host: config.get('server.host'),
+	port: config.get('server.port')
 });
 
 // Connect to the FadeCandy OPC server, when it's done, setup and start
@@ -60,24 +61,37 @@ opc.connect().then(function(opc) {
 			}]
 		}
 	}, {
-		register: require('lout'),
-		options: {
-			endpoint: '/'
-		}
+        register: require('hapi-swaggered'),
+        options: {
+            info: {
+                title: pkgConfig.name,
+                description: pkgConfig.description,
+                version: pkgConfig.version               
+            }
+        }
 	}, {
+        register: require('hapi-swaggered-ui'),
+        options: {
+            title: pkgConfig.name
+        }
+    }, {
 		register: require('hapi-router'),
 		options: {
 			routes: 'controllers/**/routes.js'
 		}
 	}, {
 		register: require('lib/errorHandler.js')
-	}], function(error) {
+	}], { 
+        routes: {
+            prefix: config.get('server.baseUri').length > 1 ? config.get('server.baseUri') : undefined
+        } 
+    }, function(error) {
 		if(error) {
 			console.error(error);
 		} else {
 			server.start(function() {
 				console.info('Server started at ' + server.info.uri);
-			})
+			});
 		}
 	});
 });
